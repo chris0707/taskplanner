@@ -1,7 +1,7 @@
 import React, { useState } from 'react'
-import TaskItem from '../taskItem';
+import TaskItem from './taskItem';
 
-export default function Body() {
+export default function Body({onToggleItemClick}) {
     const initialState = [
             {
                 taskHeader: "task1",
@@ -14,15 +14,30 @@ export default function Body() {
             {
                 taskHeader: "task3",
                 taskDesc: "this is task3"
+            },
+            {
+                taskHeader: "task4",
+                taskDesc: "this is task3"
+            },
+            {
+                taskHeader: "task5",
+                taskDesc: "this is task3"
             }
         ]
 
     const [tasks, setTasks] = useState(initialState);
-    console.log(tasks);
+    // console.log(onToggleItemClick);
+    const handleToggleItemClick = (e) => {
+        e.stopPropagation();
+        onToggleItemClick();
+        console.log('handlingtoggleitemclick');
+      }
+
+    // console.log(tasks);
   return (
-    <div className='taskHeader'>
+    <div className='card-body'>
         {tasks.map((task) => 
-            <TaskItem taskObj={task}/>
+            <TaskItem taskObj={task} onToggleItemClick={handleToggleItemClick}/>
         )}
     </div>
   )

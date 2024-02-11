@@ -1,15 +1,10 @@
-import logo from './logo.svg';
 import './App.css';
-import Body from './components/body';
-import Footer from './components/footer';
-import Header from './components/header';
+import CardContainer from './components/cardContainer';
 
 function App() {
   return (
     <div>
-      <Header />
-      <Body />
-      <Footer />
+      <CardContainer />
     </div>
   );
 }

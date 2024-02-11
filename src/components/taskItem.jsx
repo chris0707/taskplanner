@@ -1,6 +1,6 @@
 import React from 'react'
 
-export default function Task(props) {
+export default function TaskItem(props) {
     const task = props.taskObj;
     console.log('taskObj', task);
   return (

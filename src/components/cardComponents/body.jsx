@@ -1,5 +1,5 @@
 import React, { useState } from 'react'
-import Task from './task';
+import TaskItem from '../taskItem';
 
 export default function Body() {
     const initialState = [
@@ -22,7 +22,7 @@ export default function Body() {
   return (
     <div className='taskHeader'>
         {tasks.map((task) => 
-            <Task taskObj={task}/>
+            <TaskItem taskObj={task}/>
         )}
     </div>
   )

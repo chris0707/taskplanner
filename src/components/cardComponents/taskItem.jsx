@@ -5,7 +5,6 @@ export default function TaskItem(props) {
     //console.log('taskObj', task);
 
     const [isChecked, setIsChecekd] = useState(false);
-    
 
     const handleCheckboxChange = (e) => {
       setIsChecekd(prevState => !prevState);

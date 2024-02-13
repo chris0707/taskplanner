@@ -1,7 +1,7 @@
 import React, { useState } from 'react'
 import TaskItem from './taskItem';
 
-export default function Body({onToggleItemClick}) {
+export default function Body() {
     const initialState = [
             {
                 taskHeader: "task1",
@@ -26,18 +26,11 @@ export default function Body({onToggleItemClick}) {
         ]
 
     const [tasks, setTasks] = useState(initialState);
-    // console.log(onToggleItemClick);
-    const handleToggleItemClick = (e) => {
-        e.stopPropagation();
-        onToggleItemClick();
-        console.log('handlingtoggleitemclick');
-      }
-
-    // console.log(tasks);
+    
   return (
     <div className='card-body'>
         {tasks.map((task) => 
-            <TaskItem taskObj={task} onToggleItemClick={handleToggleItemClick}/>
+            <TaskItem taskObj={task}/>
         )}
     </div>
   )

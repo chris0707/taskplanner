@@ -10,19 +10,28 @@
   }
 
 .expanded{
-    position: absolute;
+    position: fixed;
     top: 50%;
     left: 50%;
     transform: translate(-50%, -50%);
-    transition: top 0.3s, left 0.3s, transform 0.3s;
+    /* transition: top 0.3s, left 0.3s, transform 0.3s; */
+    /* transition: all 0.5s ease; */
     z-index: 999;
 }
 .shrinking {
     top: initial;
     left: initial;
     transform: initial;
+    /* transition: all 0.5s ease; */
 }
 
+.card-container {
+  display: flex;
+  flex-wrap: wrap;
+  max-width: 1200px;
+  justify-content: center;
+  margin: 0 auto;
+}
 
 .card {
     width: 300px;
@@ -30,6 +39,7 @@
     background-color: #fff;
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Add shadow */
     margin: 20px;
+    transition: all 0.5s ease;
   }
   
   .card-header {

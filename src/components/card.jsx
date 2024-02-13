@@ -5,19 +5,6 @@ import CardBody from "./cardComponents/body";
 
 export default function Card() {
   const [isExpanded, setIsExpanded] = useState(false);
-  const [expandedStyle, setExpandedStyle] = useState({});
-
-//   useEffect(() => {
-//     if (isExpanded) {
-//       document.body.addEventListener("click", handleBackgroundClick);
-//     } else {
-//       document.body.removeEventListener("click", handleBackgroundClick);
-//     }
-
-//     return () => {
-//       document.body.removeEventListener("click", handleBackgroundClick);
-//     };
-//   }, [isExpanded]);
 
   const handleHeaderFooterClick = (e) => {
     e.stopPropagation(); // Stop event propagation
@@ -34,7 +21,7 @@ export default function Card() {
   const cardClassName = `card ${isExpanded ? 'expanded' : 'shrinking'}`
 
   return (
-    <div className="card-container">
+    <>
       {isExpanded && (
         <div className="cardOverlay" onClick={handleBackgroundClick} />
       )}
@@ -47,6 +34,6 @@ export default function Card() {
           Footer
         </div>
       </div>
-    </div>
+    </>
   );
 }

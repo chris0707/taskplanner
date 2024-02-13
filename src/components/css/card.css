@@ -11,18 +11,18 @@
 
 .expanded{
     position: fixed;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
-    /* transition: top 0.3s, left 0.3s, transform 0.3s; */
-    /* transition: all 0.5s ease; */
     z-index: 999;
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%, -50%);
+    /* animation: moveToMiddle 0.5s ease forwards; */
 }
 .shrinking {
-    top: initial;
+    /* top: initial;
     left: initial;
-    transform: initial;
+    transform: initial; */
     /* transition: all 0.5s ease; */
+
 }
 
 .card-container {
@@ -39,7 +39,6 @@
     background-color: #fff;
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Add shadow */
     margin: 20px;
-    transition: all 0.5s ease;
   }
   
   .card-header {
@@ -59,4 +58,19 @@
   .task {
     margin-bottom: 8px;
   }
+
+  /* @keyframes moveToMiddle {
+  } */
+  /* @keyframes moveToMiddle {
+    0% {
+      left: 0;
+      top: 0;
+      transform: translate(0, 0);
+    }
+    100% {
+      left: 50%;
+      top: 50%;
+      transform: translate(-50%, -50%);
+    }
+  } */
   

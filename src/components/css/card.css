@@ -39,11 +39,13 @@
     background-color: #fff;
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Add shadow */
     margin: 20px;
+    background-color: lightskyblue;
+    border: 2px solid black;
   }
   
   .card-header {
     padding: 10px;
-    border-bottom: 1px solid #ddd;
+    border-bottom: 2px solid black;
   }
   
   .card-body {
@@ -52,12 +54,41 @@
   
   .card-footer {
     padding: 10px;
-    border-top: 1px solid #ddd;
+    border-top: 2px solid black;
   }
   
   .task {
     margin-bottom: 8px;
+    background-color: lightsalmon;
+    border: 2px solid black;
+    border-radius: 8px;
+    display: flex;
+    flex-direction: row;
+    align-items: flex-start;
   }
+
+
+  .task label {
+    margin-right: 10px;
+    min-height: 30px;
+    margin-top: 8px;
+    margin-bottom: 8px;
+    
+  }
+
+  .task input[type="checkbox"] {
+    margin-top: 10px;
+    /* position: relative; */
+    min-height: 25px;
+    min-width: 25px;
+    border-radius: 50%;
+  }
+  
+  .task:hover input[type="checkbox"] {
+    background-color: grey;
+    
+  }
+  
 
   /* @keyframes moveToMiddle {
   } */

@@ -5,11 +5,11 @@ export default function Body() {
     const initialState = [
             {
                 taskHeader: "task1",
-                taskDesc: "this is task1"
+                taskDesc: "this is task1, create new tasks for someone and then have them create it again"
             },
             {
                 taskHeader: "task2",
-                taskDesc: "this is task2"
+                taskDesc: "this is task2, maybe have the other guy do it for them??? What do you think? Thoughts needed."
             },
             {
                 taskHeader: "task3",

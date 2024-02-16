@@ -5,7 +5,7 @@ import CardBody from "./cardComponents/body";
 import { setSelectionRange } from "@testing-library/user-event/dist/utils";
 
 export default function Card(props) {
-  const {id, headerVal} = props;
+  const {id, headerVal, content} = props;
   const [isExpanded, setIsExpanded] = useState(false);
   const [isUpdateKeyFrames, setIsUpdateKeyFrames] = useState(false);
   const cardRef = useRef(null);
@@ -77,7 +77,7 @@ export default function Card(props) {
         <div className="card-header" onClick={handleHeaderFooterClick}>
           {headerVal}
         </div>
-        <CardBody />
+        <CardBody content={content} taskName={headerVal}/>
         <div className="card-footer" onClick={handleHeaderFooterClick}>
           {}
         </div>

@@ -1,0 +1,24 @@
+.header-inputContainer {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    margin: 50px auto;
+    min-width: 300px;
+    max-width: 1200px;
+    border: 1px solid black;
+    width: 800px;
+}
+
+.header-taskContent {
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+}
+
+
+.header-buttons {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+}

@@ -2,7 +2,7 @@ import React, { useState } from 'react'
 
 export default function TaskItem(props) {
     const {taskObj, taskName} = props;
-    console.log('taskObj', taskObj);
+    //console.log('taskObj', taskObj);
 
     const [isChecked, setIsChecekd] = useState(false);
 

@@ -8,7 +8,7 @@ export default function InputBox() {
     const [inputs, setInputs] = useState([{id: 1, value:''}]);
     const { addToStack } = useContext(GlobalContext);
 
-    const addNewInput = () => {
+    const addNewInput = (event) => {
         const newInput = {
             id: inputs.length + 1,
             value: ''
@@ -34,42 +34,52 @@ export default function InputBox() {
         setInputs(filteredInputs);
     }
 
+    const autoGrowTextArea = (event) => {
+      const element = event.target;
+      if (element){
+        element.style.height = "5px";
+        element.style.height = (element.scrollHeight) + "px";
+      }
+    }
+
   return (
-    <div className="header-inputContainer">
-      <div className="header-taskName">
-        <input
+    <div className="header-componentContainer">
+      <div className="header-inputContainer">
+        <div className="header-taskName">
+          <input
             value={inputName}
             onChange={(e) => {
-            setInputName(e.target.value);
-          }}
-        />
-      </div>
-      <div className="header-taskContent">
-        {inputs.length > 0 &&
-          inputs.map((inp, idx) => (
-            <div>
-              <button onClick={() => removeInput(inp.id)}>X</button>
-              <input
-                key={inp.id}
-                id={`inp-${inp.id}`}
-                type="text"
-                value={inp.value}
-                onChange={(e) => {
-                  const newInputs = [...inputs];
-                  newInputs[idx].value = e.target.value;
-                  setInputs(newInputs);
-                }}
-              />
-            </div>
-          ))}
-      </div>
-      <div className="header-buttons">
-        <div>
-          {/* <button>Cancel</button> */}
+              setInputName(e.target.value);
+            }}
+          />
         </div>
-        <div>
-          <button onClick={addNewInput}>Add</button>
-          <button onClick={hanldeOnSave}>Save</button>
+        <div className="header-taskContent">
+          {inputs.length > 0 &&
+            inputs.map((inp, idx) => (
+              <div className="header-inputs">
+                <button onClick={() => removeInput(inp.id)}>X</button>
+                <textarea
+                  key={inp.id}
+                  id={`inp-${inp.id}`}
+                  type="text"
+                  value={inp.value}
+                  onChange={(e) => {
+                    const newInputs = [...inputs];
+                    newInputs[idx].value = e.target.value;
+                    setInputs(newInputs);
+                  }}
+                  onKeyDown={autoGrowTextArea}
+                  rows={1}
+                />
+              </div>
+            ))}
+        </div>
+        <div className="header-buttons">
+          <div>{/* <button>Cancel</button> */}</div>
+          <div>
+            <button onClick={addNewInput}>Add</button>
+            <button onClick={hanldeOnSave}>Save</button>
+          </div>
         </div>
       </div>
     </div>

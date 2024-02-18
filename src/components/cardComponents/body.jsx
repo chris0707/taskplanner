@@ -5,7 +5,6 @@ export default function Body(props) {
     const {content, taskName} = props;
     const [tasks, setTasks] = useState([]);
     
-    
     const initialState = [
             {
                 taskDesc: "this is task1, create new tasks for someone and then have them create it again"

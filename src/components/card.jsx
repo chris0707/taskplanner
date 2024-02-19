@@ -1,14 +1,15 @@
 // Card.js
-import React, { useState, useEffect, useRef } from "react";
+import React, { useState, useEffect, useRef, useContext } from "react";
 // import "./Card.css"; // Import CSS file for styling
 import CardBody from "./cardComponents/body";
-import { setSelectionRange } from "@testing-library/user-event/dist/utils";
+import { GlobalContext } from '../context/globalContext';
 
 export default function Card(props) {
   const {id, headerVal, content} = props;
   const [isExpanded, setIsExpanded] = useState(false);
   const [isUpdateKeyFrames, setIsUpdateKeyFrames] = useState(false);
   const cardRef = useRef(null);
+  const { removeCardById } = useContext(GlobalContext);
 
   useEffect(() => {
     if (isExpanded && isUpdateKeyFrames){
@@ -42,9 +43,9 @@ export default function Card(props) {
         }
       }
     `;
-    console.log(keyframes)
+    //console.log(keyframes)
     var styleSheet = document.styleSheets[0];
-    console.log(document.styleSheets);
+    //console.log(document.styleSheets);
     styleSheet.insertRule(keyframes, styleSheet.cssRules.length);
     card.style.animation = `${keyframesName} 0.5s ease forwards`;
     console.log(card.style.animation);
@@ -66,22 +67,44 @@ export default function Card(props) {
     console.log('background clicked');
   };
 
-  const cardClassName = `card ${isExpanded ? 'expanded' : 'shrinking'}`
+  const handleDeleteCard = (e, taskName) => {
+    e.stopPropagation();
+
+    const isConfirmed = window.confirm('Are you sure you want to delete task?');
+    if (isConfirmed){
+      console.log(`Removing ${taskName}`);
+      removeCardById(taskName);
+    }
+  }
+
+  const cardClassName = `card ${isExpanded ? 'expanded' : 'shrinking'}`;
 
   return (
     <>
-      {isExpanded && (
-        <div className="cardOverlay" onClick={handleBackgroundClick} />
-      )}
-      <div className={cardClassName} id={id} ref={cardRef}>
+      {isExpanded  ?(
+        <div className="cardOverlay" onClick={handleBackgroundClick}>
+          <div className={cardClassName} id={id} ref={cardRef}>
+            <button className="card-delete" onClick={(e) => handleDeleteCard(e,headerVal)}>X</button>
+            <div className="card-header" onClick={handleHeaderFooterClick}>
+              {headerVal}
+            </div>
+            <CardBody content={content} taskName={headerVal} />
+            <div className="card-footer" onClick={handleHeaderFooterClick}>
+              {}
+            </div>
+          </div>
+        </div>
+      ): (<div className={cardClassName} id={id} ref={cardRef}>
+        <button className="card-delete" onClick={(e) => handleDeleteCard(e,headerVal)}>X</button>
         <div className="card-header" onClick={handleHeaderFooterClick}>
           {headerVal}
         </div>
-        <CardBody content={content} taskName={headerVal}/>
+        <CardBody content={content} taskName={headerVal} />
         <div className="card-footer" onClick={handleHeaderFooterClick}>
           {}
         </div>
-      </div>
+      </div>)}
+      
     </>
   );
 }

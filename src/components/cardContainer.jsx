@@ -6,71 +6,10 @@ import { GlobalContext } from '../context/globalContext';
 export default function CardContainer() {
   const [cards, setCards] = useState([]);
   const { cardStacks } = useContext(GlobalContext);
+  
     useEffect(() => {
         const cardStacksCopy = [...cardStacks];
         setCards(cardStacksCopy);
-        //console.log(cardStacks);
-  
-    // Temp start - initial value of cards
-    const tempTask = [
-      {
-        taskName: "Task1",
-        taskContent: [
-        {
-          id: 1,
-          value: "This is a testCard"
-        },
-        {
-          id: 2,
-          value: "This is a testCard"
-        },
-      ]},
-      {
-        taskName: "Task2",
-        taskContent: [
-        {
-          id: 1,
-          value: "This is a testCard"
-        },
-        {
-          id: 2,
-          value: "This is a testCard"
-        },
-        {
-          id: 3,
-          value: "This is a testCard"
-        },
-        {
-          id: 4,
-          value: "This is a testCard"
-        },
-      ]},
-      {
-        taskName: "Task3",
-        taskContent: [
-        {
-          id: 1,
-          value: "This is a testCard"
-        },
-        {
-          id: 2,
-          value: "This is a testCard"
-        },
-      ]},
-      {
-        taskName: "Task4",
-        taskContent: [
-        {
-          id: 1,
-          value: "This is a testCard"
-        },
-      ]}
-    ];
-
-    setCards(tempTask)
-
-    //console.log('temp:',tempTask);
-    // Temp end
 
     }, [cardStacks]);
 

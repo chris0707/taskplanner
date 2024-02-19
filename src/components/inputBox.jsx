@@ -29,7 +29,7 @@ export default function InputBox() {
     }
 
     const removeInput = (inputId) => {
-        const filteredInputs = inputs.filter(inp => inp.id != inputId);
+        const filteredInputs = inputs.filter(inp => inp.id !== inputId);
         //console.log(filteredInputs);
         setInputs(filteredInputs);
     }

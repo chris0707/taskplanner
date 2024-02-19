@@ -1,31 +1,8 @@
 
-.cardOverlay {
-    position: fixed;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    background-color: rgba(0, 0, 0, 0.3); /* Semi-transparent black */
-    z-index: 998; /* Ensure it's on top of everything */
-  }
 
-.expanded{
-    position: fixed;
-    z-index: 999;
-    left: 50%;
-    top: 50%;
-    transform: translate(-50%, -50%);
-    /* animation: moveToMiddle 0.5s ease forwards; */
-}
-.shrinking {
-    /* top: initial;
-    left: initial;
-    transform: initial; */
-    /* transition: all 0.5s ease; */
-
-}
 
 .card-container {
+  position: relative;
   display: flex;
   flex-wrap: wrap;
   max-width: 1400px;
@@ -37,15 +14,43 @@
 }
 
 .card {
+    position: relative;
     width: 300px;
     min-width: 300px;
     border-radius: 8px;
     background-color: #fff;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    box-shadow: 8px 8px 8px rgba(0, 0, 0, 0.1);
     margin: 10px;
     background-color: lightskyblue;
     border: 2px solid black;
   }
+
+  .cardOverlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.3); /* Semi-transparent black */
+    z-index: 998; /* Ensure it's on top of everything */
+  }
+
+.expanded{
+    /* position: relative; */
+    z-index: 999;
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%, -50%);
+    margin: 0px;
+    /* animation: moveToMiddle 0.5s ease forwards; */
+}
+.shrinking {
+    /* top: initial;
+    left: initial;
+    transform: initial; */
+    /* transition: all 0.5s ease; */
+
+}
   
   .card-header {
     padding: 10px;
@@ -83,16 +88,35 @@
   .task input[type="checkbox"] {
     margin-top: 10px;
     /* position: relative; */
-    min-height: 25px;
-    min-width: 25px;
+    /* min-height: 25px;
+    min-width: 25px; */
+    width: 20px;
+    height: 20px;
     border-radius: 50%;
   }
   
-  .task:hover input[type="checkbox"] {
-    background-color: grey;
+  .task:hover{
+    background-color: lightgray;
     
   }
-  
+
+  .card-delete {
+    top: -10px;
+    right: -10px;
+    position: absolute  ;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: rgb(246, 94, 94);
+    font-size: small;
+    border-radius: 50%;
+    width: 30px;
+    height: 30px;
+  }
+
+  .card-delete:hover {
+    background-color: red;
+  }
 
   /* @keyframes moveToMiddle {
   } */

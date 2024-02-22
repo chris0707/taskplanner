@@ -18,6 +18,7 @@ export default function TaskItem(props) {
     <div className='task' key={`${taskName}-${taskObj.id}`}>
       <input type="checkbox" id={`${taskName}-${taskObj.id}`} name={`${taskName}-${taskObj.id}`} onClick={handleToggleItemClick} checked={isChecked} onChange={handleCheckboxChange} />
       <label style={isChecked ? {textDecoration: 'line-through'} : {}} htmlFor={`${taskName}-${taskObj.id}`} onClick={handleToggleItemClick}>{taskObj.value}</label>
+      {/* <textarea style={isChecked ? {textDecoration: 'line-through'} : {}} onClick={handleToggleItemClick}>{taskObj.value}</textarea> */}
     </div>
   );
 }

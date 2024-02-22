@@ -1,3 +1,13 @@
+.header-headerTitle {
+    padding: 10px;
+    border-bottom: 2px solid black;
+    font-size: larger;
+}
+.header-headerTitle .stealth {
+    font-size: large;
+    color: silver;
+}
+
 textArea,input {
     font-family: 'Chalkduster';
 }
@@ -71,8 +81,10 @@ textArea,input {
     margin: 5px;
     resize: none;
     height: auto;
-    overflow: hidden;
+    /* overflow: hidden; */
     width: 100%;
+    padding-top: 5px;
+    padding-left: 10px;
 }
 
 .header-inputs button {

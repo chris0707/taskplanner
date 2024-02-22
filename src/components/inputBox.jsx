@@ -57,7 +57,11 @@ export default function InputBox() {
           {inputs.length > 0 &&
             inputs.map((inp, idx) => (
               <div className="header-inputs">
-                <button onClick={() => removeInput(inp.id)}>X</button>
+                <button onClick={() => removeInput(inp.id)}
+                  tabIndex={-1}
+                >
+                  X
+                </button>
                 <textarea
                   key={inp.id}
                   id={`inp-${inp.id}`}

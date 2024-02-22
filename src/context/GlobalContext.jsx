@@ -92,7 +92,6 @@ export default function GlobalContextProvider(props) {
     //   //}
     // };
 
-  
     const loadFromLocalStorage = () => {
       const storedData = localStorage.getItem('localObjCards'); 
       console.log('stored', storedData);
@@ -135,6 +134,59 @@ export default function GlobalContextProvider(props) {
       //saveToLocalStorageOnDelete(filteredCardStacks);
       console.log('filtered:',filteredCardStacks);
     }
+
+    // API Calls
+    const [apiCards, setApiCards] = useState([]);
+    const getCardsFromAPI = async () => {
+        try {
+          const res = await fetch('https://api.example.com/data');
+          const fetchedData = await res.json();
+          setApiCards(fetchedData);
+          console.log(fetchedData); //Since this is async, we need to log apiCards it after it has sucecssfully set the state
+        } catch(error) {
+          console.error('GetCardsFromAPI Error:', error);
+        }
+    }
+
+    const addAPICard = (cardData) => {
+      fetch('https://api.example.com/addCard', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json'
+        },
+        body: JSON.stringify(cardData)
+      })
+      .then(res => {
+        if (!res.ok){
+          throw new Error('Failed to POST API card')
+        }
+        return res.json();
+      })
+      .then(data => {
+        console.log('Data received from POST:',data);
+      })
+      .catch(error => {
+        console.error('Error posting data:', error.message);
+      })
+    }
+
+    const removeAPICard = (id) => {
+      fetch(`https://api.example.com/removeCard/${id}`)
+      .then(res => {
+        if (!res.ok){
+          throw new Error('Failed to GET');
+        }
+        return res.json();
+      })
+      .then(resJson => {
+        console.log('Data received:', resJson);
+      })
+      .catch(err => {
+        console.error('Error removing API card', err.message)
+      });
+    }
+
+
 
     const contextValue = {
       addToStack,

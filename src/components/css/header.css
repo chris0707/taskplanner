@@ -16,7 +16,7 @@ textArea,input {
     display: flex;
     justify-content: center;
     min-width: 300px;
-    margin: 0 50px;
+    /* margin: 0 50px; */
 }
 
 .header-inputContainer {

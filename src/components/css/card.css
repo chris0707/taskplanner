@@ -102,7 +102,7 @@
     width: calc(100% - 10px); /* Adjust width to account for margins */
     padding-top: 5px;
     padding-left: 10px;
-    overflow-y: auto; /* Add vertical scrollbar when content exceeds height */
+    overflow-y: auto; 
 }
 .task textarea::-webkit-scrollbar {
   width: 12px; /* Width of the scrollbar */

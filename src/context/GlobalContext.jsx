@@ -120,12 +120,20 @@ export default function GlobalContextProvider(props) {
 
     const addToStack = (stack) => {
       const newStack = {
+        id: getNewCardId(),
         taskName: stack.taskName,
         taskContent: stack.taskContent
       }
 
       setCardStacks([...cardStacks, newStack]);
     }
+
+    const getNewCardId = () => {
+      if (cardStacks.length === 0) return 1;
+      const cardIds = cardStacks.map((card) => parseInt(card.id));
+      const newCardId = Math.max(...cardIds) + 1;
+      return newCardId;
+  }
 
     const removeCardById = (taskName) => { //this needs to be optimized using id instead.
       const filteredCardStacks = cardStacks.filter((card) => card.taskName !== taskName);
@@ -134,6 +142,30 @@ export default function GlobalContextProvider(props) {
       //saveToLocalStorageOnDelete(filteredCardStacks);
       console.log('filtered:',filteredCardStacks);
     }
+
+    const updateTaskItem = (cardId, taskId, newValue) => {
+      const currTaskItem = cardStacks.find((card) => card.id === cardId).taskContent.find((taskItem) => taskItem.id === taskId);
+      const updatedTaskItem = {...currTaskItem, value: newValue};
+      console.log('CardStacks:', cardStacks);
+      console.log('updateTaskItem:',cardId, taskId, newValue);
+      setCardStacks((prevCards) => {
+        return prevCards.map((prevCard) => {
+          if (prevCard.id === cardId){
+            const updatedCard = {
+              ...prevCard, taskContent: prevCard.taskContent.map((task) => {
+                if (task.id === taskId){
+                  return updatedTaskItem;
+                }
+                return task;
+              })
+            }
+            return updatedCard;           
+          }
+          return prevCard;
+        })
+      });
+    }
+
 
     // API Calls
     const [apiCards, setApiCards] = useState([]);
@@ -193,7 +225,8 @@ export default function GlobalContextProvider(props) {
       cardStacks,
       isExpanded,
       setIsExpanded,
-      removeCardById
+      removeCardById,
+      updateTaskItem
     }
 
   return (

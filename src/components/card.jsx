@@ -5,12 +5,12 @@ import CardBody from "./cardComponents/body";
 import { GlobalContext } from '../context/globalContext';
 
 export default function Card(props) {
-  const {id, headerVal, content} = props;
+  const {id, cardId, headerVal, content} = props;
   const [isExpanded, setIsExpanded] = useState(false);
   const [isUpdateKeyFrames, setIsUpdateKeyFrames] = useState(false);
   const cardRef = useRef(null);
   const { removeCardById } = useContext(GlobalContext);
-
+  console.log('card:', cardId);
   useEffect(() => {
     if (isExpanded && isUpdateKeyFrames){
       console.log('updating keyframes');
@@ -88,7 +88,7 @@ export default function Card(props) {
             <div className="card-header" onClick={handleHeaderFooterClick}>
               {headerVal}
             </div>
-            <CardBody content={content} taskName={headerVal} />
+            <CardBody cardId={cardId} content={content} taskName={headerVal} />
             <div className="card-footer" onClick={handleHeaderFooterClick}>
               {}
             </div>
@@ -99,7 +99,7 @@ export default function Card(props) {
         <div className="card-header" onClick={handleHeaderFooterClick}>
           {headerVal}
         </div>
-        <CardBody content={content} taskName={headerVal} />
+        <CardBody cardId={cardId} content={content} taskName={headerVal} />
         <div className="card-footer" onClick={handleHeaderFooterClick}>
           {}
         </div>

@@ -13,11 +13,11 @@ export default function CardContainer() {
 
     }, [cardStacks]);
 
-    //console.log('Cards',cards);
+    console.log('Cards',cardStacks);
   return (
     <div className='card-container'>
         {cards.length > 0 && cards.map((card,idx) => (
-          <Card id={`card-${idx}`} headerVal={card.taskName} content={card.taskContent}/>
+          <Card id={`card-${idx}`} cardId={card.id} headerVal={card.taskName} content={card.taskContent}/>
         ))}
         {/* <Card id="1" headerVal="Task1"/>
         <Card id="2" headerVal="Task2"/>

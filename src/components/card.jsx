@@ -3,13 +3,16 @@ import React, { useState, useEffect, useRef, useContext } from "react";
 // import "./Card.css"; // Import CSS file for styling
 import CardBody from "./cardComponents/body";
 import { GlobalContext } from '../context/globalContext';
+import Footer from "./cardComponents/footer";
 
 export default function Card(props) {
   const {id, cardId, headerVal, content} = props;
   const [isExpanded, setIsExpanded] = useState(false);
   const [isUpdateKeyFrames, setIsUpdateKeyFrames] = useState(false);
   const cardRef = useRef(null);
-  const { removeCardById } = useContext(GlobalContext);
+  const { removeCardById, updateCardTitle } = useContext(GlobalContext);
+  const [thisHeaderVal, setThisHeaderVal] = useState(headerVal);
+
   console.log('card:', cardId);
   useEffect(() => {
     if (isExpanded && isUpdateKeyFrames){
@@ -19,6 +22,10 @@ export default function Card(props) {
       setIsUpdateKeyFrames(false);
     }
   }, [isExpanded])
+
+  useEffect(() => {
+    hanldeTitleAutoUpdate();
+  },[thisHeaderVal])
 
   const updateKeyFrames = (keyframesName) => {
     const card = cardRef.current;
@@ -77,6 +84,10 @@ export default function Card(props) {
     }
   }
 
+  const hanldeTitleAutoUpdate = () => {
+    updateCardTitle(cardId, thisHeaderVal)
+  }
+
   const cardClassName = `card ${isExpanded ? 'expanded' : 'shrinking'}`;
 
   return (
@@ -86,7 +97,15 @@ export default function Card(props) {
           <div className={cardClassName} id={id} ref={cardRef}>
             <button className="card-delete" onClick={(e) => handleDeleteCard(e,headerVal)}>X</button>
             <div className="card-header" onClick={handleHeaderFooterClick}>
-              {headerVal}
+              <textarea 
+                onChange={
+                  (e) => {
+                    setThisHeaderVal(e.target.value)
+                  }
+                }
+                defaultValue={thisHeaderVal}
+              >
+              </textarea>
             </div>
             <CardBody cardId={cardId} content={content} taskName={headerVal} />
             <div className="card-footer" onClick={handleHeaderFooterClick}>
@@ -97,11 +116,11 @@ export default function Card(props) {
       ): (<div className={cardClassName} id={id} ref={cardRef}>
         <button className="card-delete" onClick={(e) => handleDeleteCard(e,headerVal)}>X</button>
         <div className="card-header" onClick={handleHeaderFooterClick}>
-          {headerVal}
+          {thisHeaderVal}
         </div>
         <CardBody cardId={cardId} content={content} taskName={headerVal} />
-        <div className="card-footer" onClick={handleHeaderFooterClick}>
-          {}
+        <div className="card-footer" >
+          <Footer cardId={cardId} />
         </div>
       </div>)}
       

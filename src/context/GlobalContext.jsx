@@ -10,6 +10,7 @@ export default function GlobalContextProvider(props) {
     //   // Temp start - initial value of cards
     //   const tempTask = [
     //     {
+    //       id: 1,
     //       taskName: "Task1",
     //       taskContent: [
     //         {
@@ -133,7 +134,15 @@ export default function GlobalContextProvider(props) {
       const cardIds = cardStacks.map((card) => parseInt(card.id));
       const newCardId = Math.max(...cardIds) + 1;
       return newCardId;
-  }
+    };
+
+    const getNewTaskItemId = (cardId) => {
+      const taskContent = cardStacks.find((card) => card.id === cardId).taskContent;
+      if (taskContent.length === 0) return 1;
+      const taskIds = taskContent.map((task) => parseInt(task.id));
+      const newTaskId = Math.max(...taskIds) + 1;
+      return newTaskId;
+    };
 
     const removeCardById = (taskName) => { //this needs to be optimized using id instead.
       const filteredCardStacks = cardStacks.filter((card) => card.taskName !== taskName);
@@ -164,6 +173,37 @@ export default function GlobalContextProvider(props) {
           return prevCard;
         })
       });
+    }
+
+    const updateCardTitle = (cardId, cardTitleValue) => {
+      setCardStacks((prevCards) => {
+        return prevCards.map((card) => {
+          if (card.id === cardId){
+            const newCard = {...card, taskName: cardTitleValue}
+            return newCard;
+          }
+          return card;
+        })
+      })
+
+      console.log('updateCardTitle:', cardStacks);
+    }
+
+    const addTaskToCard = (cardId) => {
+      // create new task
+      const newTask = {
+        id: getNewTaskItemId(cardId),
+        value: ""
+      }
+
+      setCardStacks((prevCards) => {
+        return prevCards.map((card) => {
+          if (card.id === cardId){
+            return {...card, taskContent: [...card.taskContent, newTask]}
+          }
+          return card;
+        })
+      })
     }
 
 
@@ -226,7 +266,9 @@ export default function GlobalContextProvider(props) {
       isExpanded,
       setIsExpanded,
       removeCardById,
-      updateTaskItem
+      updateTaskItem,
+      updateCardTitle,
+      addTaskToCard
     }
 
   return (

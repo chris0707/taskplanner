@@ -10,7 +10,6 @@ export default function CardContainer() {
     useEffect(() => {
         const cardStacksCopy = [...cardStacks];
         setCards(cardStacksCopy);
-
     }, [cardStacks]);
 
     console.log('Cards',cardStacks);

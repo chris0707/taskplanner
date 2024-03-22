@@ -6,6 +6,7 @@ export default function GlobalContextProvider(props) {
     const [cardStacks, setCardStacks] = useState([]);
     const [isExpanded, setIsExpanded] = useState(false);
     const [isLoading, setIsLoading] = useState(true);
+    
     // useEffect(() => {
     //   // Temp start - initial value of cards
     //   const tempTask = [
@@ -144,12 +145,24 @@ export default function GlobalContextProvider(props) {
       return newTaskId;
     };
 
-    const removeCardById = (taskName) => { //this needs to be optimized using id instead.
-      const filteredCardStacks = cardStacks.filter((card) => card.taskName !== taskName);
+    const removeCardById = (cardId) => { //this needs to be optimized using id instead.
+      const filteredCardStacks = cardStacks.filter((card) => card.id !== cardId);
       console.log(filteredCardStacks);
       setCardStacks(filteredCardStacks);
       //saveToLocalStorageOnDelete(filteredCardStacks);
       console.log('filtered:',filteredCardStacks);
+    }
+
+    const removeTaskById = (cardId, taskId)=> {
+      setCardStacks((prevCards) => {
+        return prevCards.map((prevCard) => {
+            if (prevCard.id === cardId) {
+              const filteredContent = prevCard.taskContent.filter((task) => task.id != taskId);
+              return { ...prevCard, taskContent: filteredContent};
+            }
+            return prevCard;
+          })
+      })
     }
 
     const updateTaskItem = (cardId, taskId, newValue) => {
@@ -268,7 +281,8 @@ export default function GlobalContextProvider(props) {
       removeCardById,
       updateTaskItem,
       updateCardTitle,
-      addTaskToCard
+      addTaskToCard,
+      removeTaskById
     }
 
   return (

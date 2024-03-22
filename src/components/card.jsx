@@ -6,11 +6,11 @@ import { GlobalContext } from '../context/globalContext';
 import Footer from "./cardComponents/footer";
 
 export default function Card(props) {
-  const {id, cardId, headerVal, content} = props;
+  const {id, cardId, headerVal, content, onTaskItemDelete} = props;
   const [isExpanded, setIsExpanded] = useState(false);
   const [isUpdateKeyFrames, setIsUpdateKeyFrames] = useState(false);
   const cardRef = useRef(null);
-  const { removeCardById, updateCardTitle } = useContext(GlobalContext);
+  const {removeCardById, updateCardTitle} = useContext(GlobalContext);
   const [thisHeaderVal, setThisHeaderVal] = useState(headerVal);
 
   console.log('card:', cardId);
@@ -92,38 +92,56 @@ export default function Card(props) {
 
   return (
     <>
-      {isExpanded  ?(
+      {isExpanded ? (
         <div className="cardOverlay" onClick={handleBackgroundClick}>
           <div className={cardClassName} id={id} ref={cardRef}>
-            <button className="card-delete" onClick={(e) => handleDeleteCard(e,headerVal)}>X</button>
+            <button
+              className="card-delete"
+              onClick={(e) => handleDeleteCard(e, cardId)}
+            >
+              X
+            </button>
             <div className="card-header" onClick={handleHeaderFooterClick}>
-              <textarea 
-                onChange={
-                  (e) => {
-                    setThisHeaderVal(e.target.value)
-                  }
-                }
-                defaultValue={thisHeaderVal}
-              >
-              </textarea>
+              <textarea
+                onChange={(e) => {
+                  setThisHeaderVal(e.target.value);
+                }}
+                value={thisHeaderVal}
+              ></textarea>
             </div>
-            <CardBody cardId={cardId} content={content} taskName={headerVal} />
+            <CardBody
+              cardId={cardId}
+              content={content}
+              taskName={headerVal}
+              onTaskItemDelete={onTaskItemDelete}
+            />
             <div className="card-footer" onClick={handleHeaderFooterClick}>
               {}
             </div>
           </div>
         </div>
-      ): (<div className={cardClassName} id={id} ref={cardRef}>
-        <button className="card-delete" onClick={(e) => handleDeleteCard(e,headerVal)}>X</button>
-        <div className="card-header" onClick={handleHeaderFooterClick}>
-          {thisHeaderVal}
+      ) : (
+        <div className={cardClassName} id={id} ref={cardRef}>
+          <button
+            className="card-delete"
+            onClick={(e) => handleDeleteCard(e, cardId)}
+          >
+            X
+          </button>
+          <div className="card-header" onClick={handleHeaderFooterClick}>
+            {thisHeaderVal}
+          </div>
+          <CardBody
+            cardId={cardId}
+            content={content}
+            taskName={headerVal}
+            onTaskItemDelete={onTaskItemDelete}
+          />
+          <div className="card-footer">
+            <Footer cardId={cardId} />
+          </div>
         </div>
-        <CardBody cardId={cardId} content={content} taskName={headerVal} />
-        <div className="card-footer" >
-          <Footer cardId={cardId} />
-        </div>
-      </div>)}
-      
+      )}
     </>
   );
 }

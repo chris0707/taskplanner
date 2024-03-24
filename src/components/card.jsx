@@ -14,14 +14,14 @@ export default function Card(props) {
   const [thisHeaderVal, setThisHeaderVal] = useState(headerVal);
 
   console.log('card:', cardId);
-  useEffect(() => {
-    if (isExpanded && isUpdateKeyFrames){
-      console.log('updating keyframes');
-      const keyframesName = `moveToMiddle-${id}`;
-      updateKeyFrames(keyframesName);
-      setIsUpdateKeyFrames(false);
-    }
-  }, [isExpanded])
+  // useEffect(() => {
+  //   if (isExpanded && isUpdateKeyFrames){
+  //     console.log('updating keyframes');
+  //     const keyframesName = `moveToMiddle-${id}`;
+  //     updateKeyFrames(keyframesName);
+  //     setIsUpdateKeyFrames(false);
+  //   }
+  // }, [isExpanded])
 
   useEffect(() => {
     hanldeTitleAutoUpdate();
@@ -50,9 +50,7 @@ export default function Card(props) {
         }
       }
     `;
-    //console.log(keyframes)
     var styleSheet = document.styleSheets[0];
-    //console.log(document.styleSheets);
     styleSheet.insertRule(keyframes, styleSheet.cssRules.length);
     card.style.animation = `${keyframesName} 0.5s ease forwards`;
     console.log(card.style.animation);

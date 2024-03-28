@@ -165,17 +165,42 @@ export default function GlobalContextProvider(props) {
       })
     }
 
-    const updateTaskItem = (cardId, taskId, newValue) => {
-      const currTaskItem = cardStacks.find((card) => card.id === cardId).taskContent.find((taskItem) => taskItem.id === taskId);
-      const updatedTaskItem = {...currTaskItem, value: newValue};
+    // const updateTaskItem = (cardId, taskId, newValue) => {        
+    //   const currTaskItem = cardStacks.find((card) => card.id === cardId).taskContent.find((taskItem) => taskItem.id === taskId);
+    //   const updatedTaskItem = {...currTaskItem, value: newValue};
+    //   console.log('CardStacks:', cardStacks);
+    //   console.log('updateTaskItem:',cardId, taskId, newValue);
+    //   setCardStacks((prevCards) => {
+    //     return prevCards.map((prevCard) => {
+    //       if (prevCard.id === cardId){
+    //         const updatedCard = {
+    //           ...prevCard, taskContent: prevCard.taskContent.map((task) => {
+    //             if (task.id === taskId){
+    //               return updatedTaskItem;
+    //             }
+    //             return task;
+    //           })
+    //         }
+    //         return updatedCard;           
+    //       }
+    //       return prevCard;
+    //     })
+    //   });
+    // }
+
+    const updateTaskItem = (cardId, _taskItem) => {        
+      
+      const currTaskItem = cardStacks.find((card) => card.id === cardId).taskContent.find((taskItem) => taskItem.id === _taskItem.id);
+      const updatedTaskItem = {...currTaskItem, value: _taskItem.value, isChecked: _taskItem.isChecked};
       console.log('CardStacks:', cardStacks);
-      console.log('updateTaskItem:',cardId, taskId, newValue);
+      console.log('before: ', _taskItem);
+      console.log('updateTaskItem:',cardId, _taskItem.id, _taskItem.value, _taskItem.isChecked);
       setCardStacks((prevCards) => {
         return prevCards.map((prevCard) => {
           if (prevCard.id === cardId){
             const updatedCard = {
               ...prevCard, taskContent: prevCard.taskContent.map((task) => {
-                if (task.id === taskId){
+                if (task.id === _taskItem.id){
                   return updatedTaskItem;
                 }
                 return task;
@@ -206,7 +231,8 @@ export default function GlobalContextProvider(props) {
       // create new task
       const newTask = {
         id: getNewTaskItemId(cardId),
-        value: ""
+        value: "",
+        isChecked: false
       }
 
       setCardStacks((prevCards) => {

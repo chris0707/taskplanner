@@ -114,7 +114,7 @@ export default function Card(props) {
               onTaskItemDelete={onTaskItemDelete}
             />
             <div className="card-footer" onClick={handleHeaderFooterClick}>
-              {}
+              <Footer cardId={cardId} />
             </div>
           </div>
         </div>

@@ -4,8 +4,8 @@ import { GlobalContext } from '../../context/globalContext';
 export default function TaskItem(props) {
     const {cardId, taskObj, taskName, onTaskItemDelete} = props;
     //console.log('taskObj', taskObj);
-    const {updateTaskItem,removeTaskById} = useContext(GlobalContext);
-    const [isChecked, setIsChecekd] = useState(false);
+    const {updateTaskItem, removeTaskById} = useContext(GlobalContext);
+    const [isChecked, setIsChecked] = useState(taskObj.isChecked);
     const [contentVal, setContentVal] = useState(taskObj.value);
     const [isFocused, setIsFocused] = useState(false);
 
@@ -14,13 +14,23 @@ export default function TaskItem(props) {
       console.log('taskobject updated!', taskObj.value);
     },[taskObj])
 
+    useEffect(() => {
+      const updatedTaskItem = {
+        id: taskObj.id,
+        value: contentVal,
+        isChecked: isChecked
+      }
+      updateTaskItem(cardId, updatedTaskItem)
+
+    }, [isChecked])
+
     const handleCheckboxChange = (e) => {
-      setIsChecekd(prevState => !prevState);
+      setIsChecked(prevState => !prevState);
     }
 
     const handleToggleItemClick = (e) => {
       e.stopPropagation();
-      console.log('handlingtoggleitemclick');
+      // console.log('handlingtoggleitemclick');
     }
 
     const autoGrowTextArea = (e) => {
@@ -32,19 +42,16 @@ export default function TaskItem(props) {
 
       const newContentVal = e.target.value;
       setContentVal(newContentVal);
-
+      
+      const updatedTaskItem = {
+        id: taskObj.id,
+        value: newContentVal,
+        isChecked: isChecked
+      }
       // TaskItem save function
-      updateTaskItem(cardId, taskObj.id, newContentVal);
-
+      // updateTaskItem(cardId, taskObj.id, newContentVal);
+      updateTaskItem(cardId, updatedTaskItem)
     }
-
-    // const handleDeleteTask = (e) => {
-    //     const isConfirmed = window.confirm('Do you want to delete this task item?');
-    //     if (isConfirmed){
-    //       removeTaskById(cardId, taskObj.id);
-    //       removeDOM();
-    //     }
-    // }
 
     const handleTextAreaFocus = () => {
       setIsFocused(true);

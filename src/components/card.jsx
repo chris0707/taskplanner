@@ -135,9 +135,9 @@ export default function Card(props) {
             taskName={headerVal}
             onTaskItemDelete={onTaskItemDelete}
           />
-          <div className="card-footer">
+          {/* <div className="card-footer">
             <Footer cardId={cardId} />
-          </div>
+          </div> */}
         </div>
       )}
     </>

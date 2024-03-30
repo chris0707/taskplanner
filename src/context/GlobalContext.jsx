@@ -245,6 +245,20 @@ export default function GlobalContextProvider(props) {
       })
     }
 
+    const IsLastItem = (cardId, taskItemId) => {
+      const cardSelected = cardStacks.find(card => card.id === cardId);
+      if (cardSelected){
+        const lastTaksItem = cardSelected.taskContent[cardSelected.taskContent.length-1];
+        if (lastTaksItem.id === taskItemId)
+          return true;
+      }
+      else{
+        console.log('GlobalContext: Card not found');
+      }
+
+      return false;
+    }
+
 
     // API Calls
     const [apiCards, setApiCards] = useState([]);
@@ -297,8 +311,6 @@ export default function GlobalContextProvider(props) {
       });
     }
 
-
-
     const contextValue = {
       addToStack,
       cardStacks,
@@ -308,7 +320,8 @@ export default function GlobalContextProvider(props) {
       updateTaskItem,
       updateCardTitle,
       addTaskToCard,
-      removeTaskById
+      removeTaskById,
+      IsLastItem
     }
 
   return (

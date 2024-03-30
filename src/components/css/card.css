@@ -83,17 +83,20 @@
     margin: 2px 2px 10px 2px;
   } 
 
-  .card-footer button {
-    background-color: lightsalmon;
-    border: 2px solid black;
+  .card-footer button,
+  .btnFooter {
+    background-color: transparent;
+    border: 0px solid black;
     border-radius: 8px;
     margin: 0 5px;
     font-size: medium;
     font-family: 'chalkduster';
   }
 
-  .card-footer button:hover {
-    background-color: salmon;
+  .card-footer button:hover,
+  .btnFooter:hover {
+    /* background-color: salmon; */
+    color: salmon;
   }
   
   .task {

@@ -2,7 +2,7 @@ import React, { useContext, useEffect, useState } from 'react'
 import { GlobalContext } from '../../context/globalContext';
 
 export default function TaskItem(props) {
-    const {cardId, taskObj, taskName, onTaskItemDelete} = props;
+    const {cardId, taskObj, taskName, onTaskItemDelete, onTabClickTextArea} = props;
     //console.log('taskObj', taskObj);
     const {updateTaskItem, removeTaskById} = useContext(GlobalContext);
     const [isChecked, setIsChecked] = useState(taskObj.isChecked);
@@ -86,6 +86,7 @@ export default function TaskItem(props) {
         value={contentVal}
         onFocus={handleTextAreaFocus}
         onBlur={handleTextAreaBlur}
+        onKeyDown={(e) => onTabClickTextArea(e,taskObj.id)}
       ></textarea>
     </div>
   );

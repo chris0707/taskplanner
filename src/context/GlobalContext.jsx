@@ -12,10 +12,12 @@ export default function GlobalContextProvider(props) {
     //   const tempTask = [
     //     {
     //       id: 1,
+    //       isCollapsed: true,
     //       taskName: "Task1",
     //       taskContent: [
     //         {
     //           id: 1,
+    //           isChecked: true,
     //           value: "This is a testCard",
     //         },
     //         {
@@ -123,6 +125,7 @@ export default function GlobalContextProvider(props) {
     const addToStack = (stack) => {
       const newStack = {
         id: getNewCardId(),
+        isCollapsed: false,
         taskName: stack.taskName,
         taskContent: stack.taskContent
       }
@@ -224,7 +227,21 @@ export default function GlobalContextProvider(props) {
         })
       })
 
-      console.log('updateCardTitle:', cardStacks);
+      // console.log('updateCardTitle:', cardStacks);
+    }
+
+    const updateCard = (cardId, cardTitleValue, isCollapsed) => {
+      setCardStacks((prevCards) => {
+        return prevCards.map((card) => {
+          if (card.id === cardId){
+            const newCard = {...card, taskName: cardTitleValue, isCollapsed: isCollapsed}
+            return newCard;
+          }
+          return card;
+        })
+      })
+
+      // console.log('updateCardTitle:', cardStacks);
     }
 
     const addTaskToCard = (cardId) => {
@@ -318,7 +335,8 @@ export default function GlobalContextProvider(props) {
       setIsExpanded,
       removeCardById,
       updateTaskItem,
-      updateCardTitle,
+      updateCardTitle, // Replace any references of this with updateCard
+      updateCard,
       addTaskToCard,
       removeTaskById,
       IsLastItem

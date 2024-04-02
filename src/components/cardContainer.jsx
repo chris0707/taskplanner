@@ -27,9 +27,10 @@ export default function CardContainer() {
         cards.map((card, idx) => (
           <Card
             id={`card-${idx}`}
-            cardId={card.id}
-            headerVal={card.taskName}
-            content={card.taskContent}
+            // cardId={card.id}
+            // headerVal={card.taskName}
+            // content={card.taskContent}
+            card={card}
             onTaskItemDelete={handleDeleteCard}
           />
         ))}

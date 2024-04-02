@@ -1,16 +1,27 @@
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 
 export default function Collapsible(props) {
-    const {children } = props;
-    const [isOpen, setIsOpen] = useState(false)
+    const {isCollapsed, handleCollapseToggle, children} = props;
+    const [isOpen, setIsOpen] = useState(!isCollapsed)
+    // console.log('isCollapsed:',isOpen)
+
+    // useEffect(() => {
+    //   //handleCollapseToggle();
+    //   setIsOpen(!isCollapsed);
+    // }, [isCollapsed])
+
+    useEffect(() => {
+      handleCollapseToggle(!isOpen);
+    }, [isOpen])
+
     const toggleCollapse = (e) => {
         e.stopPropagation();
-        setIsOpen(!isOpen);
+        setIsOpen(() => !isOpen);
     };
 
   return (
     <div className="collapsible">
-      <div className="collapsible-header" onClick={toggleCollapse}>
+      <div className="collapsible-header" onClick={toggleCollapse} >
             <span className={`arrow ${isOpen ? 'open' : 'close'}`}>&#x25B6;</span>
       </div>
       {isOpen && (

@@ -11,6 +11,7 @@ export default function TaskItem(props) {
 
     useEffect(() => {
       setContentVal(taskObj.value);
+      setIsChecked(taskObj.isChecked);
       console.log('taskobject updated!', taskObj.value);
     },[taskObj])
 

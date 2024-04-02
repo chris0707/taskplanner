@@ -4,8 +4,8 @@ import Collapsible from './Collapsible';
 import { GlobalContext } from '../../context/globalContext';
 
 export default function Body(props) {
-    const {cardId, content, taskName, onTaskItemDelete} = props;
-    const {addTaskToCard, IsLastItem} = useContext(GlobalContext);
+    const {card, onTaskItemDelete} = props;
+    const {addTaskToCard, IsLastItem, updateCard} = useContext(GlobalContext);
 
     const hanldeDivClick = (e) => {
       e.stopPropagation();
@@ -19,16 +19,19 @@ export default function Body(props) {
       console.log('handleKeyDownTab', taskItemId);
         if (e.keyCode === 9){
           // - If (taskItemIndex === taskContent.length - 1) Generate new TaskItem
-          if (IsLastItem(cardId, taskItemId))
+          if (IsLastItem(card.id, taskItemId))
           {
-            addTaskToCard(cardId); // Add new taskItem to the list
+            addTaskToCard(card.id); // Add new taskItem to the list
             e.preventDefault();
           }
             
         }
     }
 
-    // TODO: Move Add task to body with + add list item
+    const handleCollapseToggle = (isCollapsed) => {
+      console.log("isCollapsed:test", isCollapsed);
+      updateCard(card.id, card.taskName, isCollapsed);
+    };
     
 
   return (
@@ -38,18 +41,23 @@ export default function Body(props) {
     //     )}
     // </div>
     <div className="card-body" onClick={hanldeDivClick}>
-      <Collapsible>
-        {content.length > 0 &&
-          content.map((task) => (
+      <Collapsible
+        isCollapsed={card.isCollapsed}
+        handleCollapseToggle={handleCollapseToggle}
+      >
+        {card.taskContent.length > 0 &&
+          card.taskContent.map((task) => (
             <TaskItem
               taskObj={task}
-              taskName={taskName}
-              cardId={cardId}
+              taskName={card.taskName}
+              cardId={card.id}
               onTaskItemDelete={onTaskItemDelete}
               onTabClickTextArea={handleKeyDownTab}
             />
           ))}
-        <button className='btnFooter' onClick={() => addTaskToCard(cardId)}>+ Task item</button>
+        <button className="btnFooter" onClick={() => addTaskToCard(card.id)}>
+          + Task item
+        </button>
       </Collapsible>
     </div>
   );

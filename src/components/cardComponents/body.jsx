@@ -45,16 +45,40 @@ export default function Body(props) {
         isCollapsed={card.isCollapsed}
         handleCollapseToggle={handleCollapseToggle}
       >
-        {card.taskContent.length > 0 &&
-          card.taskContent.map((task) => (
-            <TaskItem
-              taskObj={task}
-              taskName={card.taskName}
-              cardId={card.id}
-              onTaskItemDelete={onTaskItemDelete}
-              onTabClickTextArea={handleKeyDownTab}
-            />
-          ))}
+        <div>
+          {card.taskContent.length > 0 &&
+            card.taskContent.map((task) => {
+              if (!task.isChecked) {
+                return (
+                  <TaskItem
+                    taskObj={task}
+                    taskName={card.taskName}
+                    cardId={card.id}
+                    onTaskItemDelete={onTaskItemDelete}
+                    onTabClickTextArea={handleKeyDownTab}
+                  />
+                );
+              }
+            })}
+        </div>
+        {card.taskContent.some((task) => task.isChecked === true) && (
+          <div className="completed">
+            {card.taskContent.length > 0 &&
+              card.taskContent.map((task) => {
+                if (task.isChecked) {
+                  return (
+                    <TaskItem
+                      taskObj={task}
+                      taskName={card.taskName}
+                      cardId={card.id}
+                      onTaskItemDelete={onTaskItemDelete}
+                      onTabClickTextArea={handleKeyDownTab}
+                    />
+                  );
+                }
+              })}
+          </div>
+        )}
         <button className="btnFooter" onClick={() => addTaskToCard(card.id)}>
           + Task item
         </button>

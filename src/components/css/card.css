@@ -225,6 +225,26 @@
   transform: rotate(0deg);
 }
 
+
+.completed {
+  border-top: 1px solid black;
+  margin-top: 5px;
+  padding-top: 5px;
+}
+
+.completed textarea,
+.completed .task {
+  background-color: grey;
+}
+
+.completed .task:hover {
+  background-color: grey;
+}
+
+.completed .task:hover textarea{
+  background-color: grey;
+}
+
   /* @keyframes moveToMiddle {
   } */
   /* @keyframes moveToMiddle {

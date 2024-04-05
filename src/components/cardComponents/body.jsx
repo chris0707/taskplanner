@@ -5,7 +5,7 @@ import { GlobalContext } from '../../context/globalContext';
 
 export default function Body(props) {
     const {card, onTaskItemDelete} = props;
-    const {addTaskToCard, IsLastItem, updateCard} = useContext(GlobalContext);
+    const {addTaskToCard, IsLastItem, updateCardCollapse, updateCardCollapseFinished} = useContext(GlobalContext);
 
     const hanldeDivClick = (e) => {
       e.stopPropagation();
@@ -30,9 +30,13 @@ export default function Body(props) {
 
     const handleCollapseToggle = (isCollapsed) => {
       console.log("isCollapsed:test", isCollapsed);
-      updateCard(card.id, card.taskName, isCollapsed);
+      updateCardCollapse(card.id, isCollapsed);
     };
-    
+
+    const handleCollapseFinishedToggle = (isCollapsed) => {
+      console.log("isCollapsedFinished:test", isCollapsed);
+      updateCardCollapseFinished(card.id, isCollapsed);
+    };
 
   return (
     // <div className='card-body' onClick={hanldeDivClick}>
@@ -61,24 +65,31 @@ export default function Body(props) {
               }
             })}
         </div>
-        {card.taskContent.some((task) => task.isChecked === true) && (
-          <div className="completed">
-            {card.taskContent.length > 0 &&
-              card.taskContent.map((task) => {
-                if (task.isChecked) {
-                  return (
-                    <TaskItem
-                      taskObj={task}
-                      taskName={card.taskName}
-                      cardId={card.id}
-                      onTaskItemDelete={onTaskItemDelete}
-                      onTabClickTextArea={handleKeyDownTab}
-                    />
-                  );
-                }
-              })}
-          </div>
-        )}
+
+        <Collapsible
+          isCollapsed={card.isCompletedCollapsed} // TODO: Update to finIsCollapsed
+          handleCollapseToggle={handleCollapseFinishedToggle}
+        >
+          {card.taskContent.some((task) => task.isChecked === true) && (
+            <div className="completed">
+              {card.taskContent.length > 0 &&
+                card.taskContent.map((task) => {
+                  if (task.isChecked) {
+                    return (
+                      <TaskItem
+                        taskObj={task}
+                        taskName={card.taskName}
+                        cardId={card.id}
+                        onTaskItemDelete={onTaskItemDelete}
+                        onTabClickTextArea={handleKeyDownTab}
+                      />
+                    );
+                  }
+                })}
+            </div>
+          )}
+        </Collapsible>
+
         <button className="btnFooter" onClick={() => addTaskToCard(card.id)}>
           + Task item
         </button>

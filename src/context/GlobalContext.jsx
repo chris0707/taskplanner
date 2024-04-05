@@ -13,6 +13,7 @@ export default function GlobalContextProvider(props) {
     //     {
     //       id: 1,
     //       isCollapsed: true,
+    //       isCompletedCollapsed: true,
     //       taskName: "Task1",
     //       taskContent: [
     //         {
@@ -126,6 +127,7 @@ export default function GlobalContextProvider(props) {
       const newStack = {
         id: getNewCardId(),
         isCollapsed: false,
+        isCompletedCollapsed: false,
         taskName: stack.taskName,
         taskContent: stack.taskContent
       }
@@ -230,11 +232,24 @@ export default function GlobalContextProvider(props) {
       // console.log('updateCardTitle:', cardStacks);
     }
 
-    const updateCard = (cardId, cardTitleValue, isCollapsed) => {
+    const updateCardCollapse = (cardId, isCollapsed) => {
       setCardStacks((prevCards) => {
         return prevCards.map((card) => {
           if (card.id === cardId){
-            const newCard = {...card, taskName: cardTitleValue, isCollapsed: isCollapsed}
+            const newCard = {...card, isCollapsed: isCollapsed}
+            return newCard;
+          }
+          return card;
+        })
+      })
+
+      // console.log('updateCardTitle:', cardStacks);
+    }
+    const updateCardCollapseFinished = (cardId, isCollapsed) => {
+      setCardStacks((prevCards) => {
+        return prevCards.map((card) => {
+          if (card.id === cardId){
+            const newCard = {...card, isCompletedCollapsed: isCollapsed}
             return newCard;
           }
           return card;
@@ -335,8 +350,9 @@ export default function GlobalContextProvider(props) {
       setIsExpanded,
       removeCardById,
       updateTaskItem,
-      updateCardTitle, // Replace any references of this with updateCard
-      updateCard,
+      updateCardTitle,
+      updateCardCollapse,
+      updateCardCollapseFinished,
       addTaskToCard,
       removeTaskById,
       IsLastItem

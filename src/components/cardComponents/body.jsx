@@ -48,6 +48,7 @@ export default function Body(props) {
       <Collapsible
         isCollapsed={card.isCollapsed}
         handleCollapseToggle={handleCollapseToggle}
+        collapsibleTitle="Task list"
       >
         <div>
           {card.taskContent.length > 0 &&
@@ -66,11 +67,12 @@ export default function Body(props) {
             })}
         </div>
 
-        <Collapsible
-          isCollapsed={card.isCompletedCollapsed} // TODO: Update to finIsCollapsed
-          handleCollapseToggle={handleCollapseFinishedToggle}
-        >
-          {card.taskContent.some((task) => task.isChecked === true) && (
+        {card.taskContent.some((task) => task.isChecked === true) && (
+          <Collapsible
+            isCollapsed={card.isCompletedCollapsed} // TODO: Update to finIsCollapsed
+            handleCollapseToggle={handleCollapseFinishedToggle}
+            collapsibleTitle="Completed"
+          >
             <div className="completed">
               {card.taskContent.length > 0 &&
                 card.taskContent.map((task) => {
@@ -87,9 +89,8 @@ export default function Body(props) {
                   }
                 })}
             </div>
-          )}
-        </Collapsible>
-
+          </Collapsible>
+        )}
         <button className="btnFooter" onClick={() => addTaskToCard(card.id)}>
           + Task item
         </button>

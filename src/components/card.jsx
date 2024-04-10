@@ -13,52 +13,13 @@ export default function Card(props) {
   const {removeCardById, updateCardTitle} = useContext(GlobalContext);
   const [thisHeaderVal, setThisHeaderVal] = useState(card.taskName);
 
-  // console.log('card:', card.id);
-  // console.log('thisHeaderVal',card)
-  // useEffect(() => {
-  //   if (isExpanded && isUpdateKeyFrames){
-  //     console.log('updating keyframes');
-  //     const keyframesName = `moveToMiddle-${id}`;
-  //     updateKeyFrames(keyframesName);
-  //     setIsUpdateKeyFrames(false);
-  //   }
-  // }, [isExpanded])
+  useEffect(() => {
+    setThisHeaderVal(card.taskName);
+  },[card])
 
   useEffect(() => {
     hanldeTitleAutoUpdate();
   },[thisHeaderVal])
-
-  const updateKeyFrames = (keyframesName) => {
-    const card = cardRef.current;
-    console.log(card);
-    if(!card) return false;
-
-    var rect = card.getBoundingClientRect();
-    var initialLeft = rect.left + window.scrollX;
-    var initialTop = rect.top + window.scrollY;
-  
-    var keyframes = `
-      @keyframes ${keyframesName} {
-        0% {
-          left: ${initialLeft}px;
-          top: ${initialTop}px;
-          transform: translate(-${initialLeft}px, -${initialTop}px);
-        }
-        100% {
-          left: 50%;
-          top: 50%;
-          transform: translate(-50%, -50%);
-        }
-      }
-    `;
-    var styleSheet = document.styleSheets[0];
-    styleSheet.insertRule(keyframes, styleSheet.cssRules.length);
-    card.style.animation = `${keyframesName} 0.5s ease forwards`;
-    console.log(card.style.animation);
-    setTimeout(() => {
-      styleSheet.deleteRule(styleSheet.cssRules.length - 1);
-  }, 500);
-  }
 
   const handleHeaderFooterClick = (e) => {
     e.stopPropagation(); // Stop event propagation
@@ -132,15 +93,9 @@ export default function Card(props) {
             {thisHeaderVal}
           </div>
           <CardBody
-            // cardId={card.id}
-            // content={card.taskConent}
-            // taskName={card.taskName}
             card={card}
             onTaskItemDelete={onTaskItemDelete}
           />
-          {/* <div className="card-footer">
-            <Footer cardId={cardId} />
-          </div> */}
         </div>
       )}
     </>

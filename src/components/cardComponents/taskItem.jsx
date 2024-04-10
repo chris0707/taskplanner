@@ -88,6 +88,7 @@ export default function TaskItem(props) {
         onFocus={handleTextAreaFocus}
         onBlur={handleTextAreaBlur}
         onKeyDown={(e) => onTabClickTextArea(e,taskObj.id)}
+        // rows={2}
       ></textarea>
     </div>
   );

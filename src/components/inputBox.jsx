@@ -51,6 +51,7 @@ export default function InputBox() {
             onChange={(e) => {
               setInputName(e.target.value);
             }}
+            placeholder='Title'
           />
         </div>
         <div className="header-taskContent">
@@ -74,6 +75,7 @@ export default function InputBox() {
                   }}
                   onKeyDown={autoGrowTextArea}
                   rows={1}
+                  placeholder='add a task'
                 />
               </div>
             ))}
@@ -81,8 +83,9 @@ export default function InputBox() {
         <div className="header-buttons">
           <div>{/* <button>Cancel</button> */}</div>
           <div>
-            <button onClick={addNewInput}>Add</button>
-            <button onClick={hanldeOnSave}>Save</button>
+            {/* <button onClick={addNewInput}>Add</button>
+            <button onClick={hanldeOnSave}>Save</button> */}
+            <button onClick={hanldeOnSave}>Enter</button>
           </div>
         </div>
       </div>

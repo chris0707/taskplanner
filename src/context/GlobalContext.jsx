@@ -162,7 +162,7 @@ export default function GlobalContextProvider(props) {
       setCardStacks((prevCards) => {
         return prevCards.map((prevCard) => {
             if (prevCard.id === cardId) {
-              const filteredContent = prevCard.taskContent.filter((task) => task.id != taskId);
+              const filteredContent = prevCard.taskContent.filter((task) => task.id !== taskId);
               return { ...prevCard, taskContent: filteredContent};
             }
             return prevCard;
@@ -291,6 +291,23 @@ export default function GlobalContextProvider(props) {
       return false;
     }
 
+    const IsLastPendingItem = (cardId, taskItemId) => {
+      const cardSelected = cardStacks.find(card => card.id === cardId);
+      if (cardSelected){
+        // TODO: count pending tasks
+        // if lastpendingitem matches the count of pending task then return true
+        const pendingTasks = cardSelected.taskContent.filter(task => task.isChecked === false);
+        const lastPendingTaskItem = pendingTasks[pendingTasks.length-1];
+        if (lastPendingTaskItem.id === taskItemId)
+          return true;
+      }
+      else{
+        console.log('GlobalContext: Card not found');
+      }
+
+      return false;
+    }
+
 
     // API Calls
     const [apiCards, setApiCards] = useState([]);
@@ -355,7 +372,8 @@ export default function GlobalContextProvider(props) {
       updateCardCollapseFinished,
       addTaskToCard,
       removeTaskById,
-      IsLastItem
+      IsLastItem,
+      IsLastPendingItem
     }
 
   return (

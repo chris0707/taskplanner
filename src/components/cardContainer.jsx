@@ -8,9 +8,9 @@ export default function CardContainer() {
   const { cardStacks, removeTaskById } = useContext(GlobalContext);
   
     useEffect(() => {
-        const cardStacksCopy = [...cardStacks];
+        const cardStacksCopy = [...cardStacks].reverse();
         setCards(cardStacksCopy);
-    }, [cardStacks]);
+    }, [cards, cardStacks]);
 
     console.log('Cards',cardStacks);
 

@@ -5,7 +5,7 @@ import { GlobalContext } from '../../context/globalContext';
 
 export default function Body(props) {
     const {card, onTaskItemDelete} = props;
-    const {addTaskToCard, IsLastItem, updateCardCollapse, updateCardCollapseFinished} = useContext(GlobalContext);
+    const {addTaskToCard, IsLastItem, IsLastPendingItem, updateCardCollapse, updateCardCollapseFinished} = useContext(GlobalContext);
 
     const hanldeDivClick = (e) => {
       e.stopPropagation();
@@ -19,7 +19,7 @@ export default function Body(props) {
       console.log('handleKeyDownTab', taskItemId);
         if (e.keyCode === 9){
           // - If (taskItemIndex === taskContent.length - 1) Generate new TaskItem
-          if (IsLastItem(card.id, taskItemId))
+          if (IsLastPendingItem(card.id, taskItemId))
           {
             addTaskToCard(card.id); // Add new taskItem to the list
             e.preventDefault();

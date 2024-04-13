@@ -11,11 +11,15 @@ export default function Card(props) {
   const [isUpdateKeyFrames, setIsUpdateKeyFrames] = useState(false);
   const cardRef = useRef(null);
   const {removeCardById, updateCardTitle} = useContext(GlobalContext);
+  const [thisCard, setThisCard] = useState(card);
   const [thisHeaderVal, setThisHeaderVal] = useState(card.taskName);
 
   useEffect(() => {
     setThisHeaderVal(card.taskName);
-  },[card])
+    setThisCard(card);
+
+    console.log('refreshed card values: ', card);
+  },[card]);
 
   useEffect(() => {
     hanldeTitleAutoUpdate();
@@ -45,7 +49,7 @@ export default function Card(props) {
   }
 
   const hanldeTitleAutoUpdate = () => {
-    updateCardTitle(card.id, thisHeaderVal)
+    updateCardTitle(thisCard.id, thisHeaderVal)
   }
 
   const cardClassName = `card ${isExpanded ? 'expanded' : 'shrinking'}`;
@@ -57,7 +61,7 @@ export default function Card(props) {
           <div className={cardClassName} id={id} ref={cardRef}>
             <button
               className="card-delete"
-              onClick={(e) => handleDeleteCard(e, card.id)}
+              onClick={(e) => handleDeleteCard(e, thisCard.id)}
             >
               X
             </button>
@@ -73,11 +77,11 @@ export default function Card(props) {
               // cardId={cardId}
               // content={content}
               // taskName={headerVal}
-              card={card}
+              card={thisCard}
               onTaskItemDelete={onTaskItemDelete}
             />
             <div className="card-footer" onClick={handleHeaderFooterClick}>
-              <Footer cardId={card.id} />
+              <Footer cardId={thisCard.id} />
             </div>
           </div>
         </div>
@@ -85,7 +89,7 @@ export default function Card(props) {
         <div className={cardClassName} id={id} ref={cardRef}>
           <button
             className="card-delete"
-            onClick={(e) => handleDeleteCard(e, card.id)}
+            onClick={(e) => handleDeleteCard(e, thisCard.id)}
           >
             X
           </button>
@@ -93,7 +97,7 @@ export default function Card(props) {
             {thisHeaderVal}
           </div>
           <CardBody
-            card={card}
+            card={thisCard}
             onTaskItemDelete={onTaskItemDelete}
           />
         </div>

@@ -3,12 +3,10 @@ import React, { useEffect, useState } from 'react'
 export default function Collapsible(props) {
     const {isCollapsed, handleCollapseToggle, collapsibleTitle, children} = props;
     const [isOpen, setIsOpen] = useState(!isCollapsed)
-    // console.log('isCollapsed:',isOpen)
-
-    // useEffect(() => {
-    //   //handleCollapseToggle();
-    //   setIsOpen(!isCollapsed);
-    // }, [isCollapsed])
+    
+    useEffect(() => {
+      setIsOpen(!isCollapsed);
+    },[isCollapsed])
 
     useEffect(() => {
       handleCollapseToggle(!isOpen);

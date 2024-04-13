@@ -7,78 +7,6 @@ export default function GlobalContextProvider(props) {
     const [isExpanded, setIsExpanded] = useState(false);
     const [isLoading, setIsLoading] = useState(true);
     
-    // useEffect(() => {
-    //   // Temp start - initial value of cards
-    //   const tempTask = [
-    //     {
-    //       id: 1,
-    //       isCollapsed: true,
-    //       isCompletedCollapsed: true,
-    //       taskName: "Task1",
-    //       taskContent: [
-    //         {
-    //           id: 1,
-    //           isChecked: true,
-    //           value: "This is a testCard",
-    //         },
-    //         {
-    //           id: 2,
-    //           value: "This is a testCard",
-    //         },
-    //       ],
-    //     },
-    //     {
-    //       taskName: "Task2",
-    //       taskContent: [
-    //         {
-    //           id: 1,
-    //           value: "This is a testCard",
-    //         },
-    //         {
-    //           id: 2,
-    //           value: "This is a testCard",
-    //         },
-    //         {
-    //           id: 3,
-    //           value: "This is a testCard",
-    //         },
-    //         {
-    //           id: 4,
-    //           value: "This is a testCard",
-    //         },
-    //       ],
-    //     },
-    //     {
-    //       taskName: "Task3",
-    //       taskContent: [
-    //         {
-    //           id: 1,
-    //           value: "This is a testCard",
-    //         },
-    //         {
-    //           id: 2,
-    //           value: "This is a testCard",
-    //         },
-    //       ],
-    //     },
-    //     {
-    //       taskName: "Task4",
-    //       taskContent: [
-    //         {
-    //           id: 1,
-    //           value: "This is a testCard",
-    //         },
-    //       ],
-    //     },
-    //   ];
-  
-    //   setCardStacks(tempTask);
-  
-    //   //console.log('temp:',tempTask);
-    //   // Temp end
-    // },[]);
-
-    
     const saveToLocalStorageOnRefresh = (data) => {
       if (!data || JSON.stringify(data).trim() !== '[]'){ // handles refresh to avoid reset
         console.log('saveToLocalStorage', data);
@@ -88,14 +16,6 @@ export default function GlobalContextProvider(props) {
       else 
         localStorage.setItem('localObjCards', JSON.stringify(data));
     };
-
-    // const saveToLocalStorageOnDelete = (data) => {
-    //   //if (!data || JSON.stringify(data).trim() !== ''){ // handles refresh to avoid reset
-    //     console.log('saveToLocalStorageDelete', data);
-    //     localStorage.setItem('localObjCards', JSON.stringify(data));
-    //     console.log('loadingcards',JSON.stringify(data));
-    //   //}
-    // };
 
     const loadFromLocalStorage = () => {
       const storedData = localStorage.getItem('localObjCards'); 

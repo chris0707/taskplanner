@@ -1,4 +1,4 @@
-import React, { useContext } from 'react'
+import React, { useContext, useEffect, useState } from 'react'
 import TaskItem from './taskItem';
 import Collapsible from './Collapsible';
 import { GlobalContext } from '../../context/globalContext';
@@ -6,6 +6,16 @@ import { GlobalContext } from '../../context/globalContext';
 export default function Body(props) {
     const {card, onTaskItemDelete} = props;
     const {addTaskToCard, IsLastItem, IsLastPendingItem, updateCardCollapse, updateCardCollapseFinished} = useContext(GlobalContext);
+    const [thisCard, setThisCard] = useState(card);
+    const [thisCardCollapse, setThisCardCollapse] = useState(card.isCollapsed);
+    const [thisCardCompleteCollapse, setThisCardCompleteCollapse] = useState(card.isCompletedCollapsed);
+
+    useEffect(() => {
+      setThisCard(card);
+      console.log('Body - card refreshed', card)
+      setThisCardCollapse(card.isCollapsed);
+      setThisCardCompleteCollapse(card.isCompletedCollapsed);
+    },[card]);
 
     const hanldeDivClick = (e) => {
       e.stopPropagation();
@@ -19,46 +29,40 @@ export default function Body(props) {
       console.log('handleKeyDownTab', taskItemId);
         if (e.keyCode === 9){
           // - If (taskItemIndex === taskContent.length - 1) Generate new TaskItem
-          if (IsLastPendingItem(card.id, taskItemId))
+          if (IsLastPendingItem(thisCard.id, taskItemId))
           {
-            addTaskToCard(card.id); // Add new taskItem to the list
+            addTaskToCard(thisCard.id); // Add new taskItem to the list
             e.preventDefault();
           }
-            
         }
     }
 
     const handleCollapseToggle = (isCollapsed) => {
       console.log("isCollapsed:test", isCollapsed);
-      updateCardCollapse(card.id, isCollapsed);
+      updateCardCollapse(thisCard.id, isCollapsed);
     };
 
     const handleCollapseFinishedToggle = (isCollapsed) => {
       console.log("isCollapsedFinished:test", isCollapsed);
-      updateCardCollapseFinished(card.id, isCollapsed);
+      updateCardCollapseFinished(thisCard.id, isCollapsed);
     };
 
   return (
-    // <div className='card-body' onClick={hanldeDivClick}>
-    //     {content.length > 0 && content.map((task) =>
-    //         <TaskItem taskObj={task} taskName={taskName} cardId={cardId} onTaskItemDelete={onTaskItemDelete}/>
-    //     )}
-    // </div>
     <div className="card-body" onClick={hanldeDivClick}>
       <Collapsible
-        isCollapsed={card.isCollapsed}
+        isCollapsed={thisCardCollapse}
         handleCollapseToggle={handleCollapseToggle}
         collapsibleTitle="Task list"
       >
         <div>
-          {card.taskContent.length > 0 &&
-            card.taskContent.map((task) => {
+          {thisCard.taskContent.length > 0 &&
+            thisCard.taskContent.map((task) => {
               if (!task.isChecked) {
                 return (
                   <TaskItem
                     taskObj={task}
-                    taskName={card.taskName}
-                    cardId={card.id}
+                    taskName={thisCard.taskName}
+                    cardId={thisCard.id}
                     onTaskItemDelete={onTaskItemDelete}
                     onTabClickTextArea={handleKeyDownTab}
                   />
@@ -67,21 +71,21 @@ export default function Body(props) {
             })}
         </div>
 
-        {card.taskContent.some((task) => task.isChecked === true) && (
+        {thisCard.taskContent.some((task) => task.isChecked === true) && (
           <Collapsible
-            isCollapsed={card.isCompletedCollapsed} // TODO: Update to finIsCollapsed
+            isCollapsed={thisCardCompleteCollapse} // TODO: Update to finIsCollapsed
             handleCollapseToggle={handleCollapseFinishedToggle}
             collapsibleTitle="Completed"
           >
             <div className="completed">
-              {card.taskContent.length > 0 &&
-                card.taskContent.map((task) => {
+              {thisCard.taskContent.length > 0 &&
+                thisCard.taskContent.map((task) => {
                   if (task.isChecked) {
                     return (
                       <TaskItem
                         taskObj={task}
-                        taskName={card.taskName}
-                        cardId={card.id}
+                        taskName={thisCard.taskName}
+                        cardId={thisCard.id}
                         onTaskItemDelete={onTaskItemDelete}
                         onTabClickTextArea={handleKeyDownTab}
                       />
@@ -91,7 +95,7 @@ export default function Body(props) {
             </div>
           </Collapsible>
         )}
-        <button className="btnFooter" onClick={() => addTaskToCard(card.id)}>
+        <button className="btnFooter" onClick={() => addTaskToCard(thisCard.id)}>
           + Task item
         </button>
       </Collapsible>

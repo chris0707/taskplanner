@@ -1,32 +1,43 @@
-import React, { useContext, useEffect, useState } from 'react'
+import React, { useContext, useEffect, useRef, useState } from 'react'
 import './css/header.css'
 import { GlobalContext } from '../context/globalContext';
 
 export default function InputBox() {
 
     const [inputName, setInputName] = useState('');
-    const [inputs, setInputs] = useState([{id: 1, value:''}]);
+    const [inputs, setInputs] = useState([]);
     const { addToStack } = useContext(GlobalContext);
     const [isBoxClicked, setIsBoxClicked] = useState(false);
+    const lastInputRef = useRef(null);
 
     const addNewInput = (event) => {
-        const newInput = {
-            id: inputs.length + 1,
-            value: ''
-        };
+      // Clear the value and set it back to the placeholder
+      event.target.value = "";
+      const newInput = {
+        id: inputs.length + 1,
+        value: "",
+      };
 
-        setInputs([...inputs, newInput]);
-    }
+      setTimeout(() => {
+        const newInputRef = document.getElementById(`inp-${newInput.id}`);
+        if (newInputRef) {
+          newInputRef.focus();
+        }
+      }, 0);
+
+      setInputs([...inputs, newInput]);
+    };
     
     const hanldeOnSave = () => {
         const newTask = {
             taskName: inputName,
             taskContent: inputs
         }
-
-        addToStack(newTask)
+        if (inputName !== '' || inputs.length > 0)
+          addToStack(newTask)
         setInputName(''); // task title
-        setInputs([{id: 1, value:''}]);
+        setInputs([]);
+        // setInputs([{id: 1, value:''}]);
     }
 
     const removeInput = (inputId) => {
@@ -43,10 +54,21 @@ export default function InputBox() {
       }
     }
 
+    const handleClickHeaderTaskItem = () => {
+      // Focus on the last input when header-taskItem is clicked
+      addNewInput();
+      if (lastInputRef.current) {
+        lastInputRef.current.focus();
+      }
+    };
+
   return (
     <div className="header-componentContainer">
       {!isBoxClicked ? (
-        <div className="header-inputContainer" onClick={() => setIsBoxClicked(true)}>
+        <div
+          className="header-inputContainer"
+          onClick={() => setIsBoxClicked(true)}
+        >
           <p>+ Create a task</p>
         </div>
       ) : (
@@ -83,6 +105,17 @@ export default function InputBox() {
                   />
                 </div>
               ))}
+            <div className="header-inputs">
+              <textarea
+                className='header-taskItem'
+                type="text"
+                onClick={addNewInput}
+                onChange={addNewInput}
+                rows={1}
+                tabIndex={0}
+                placeholder="+ task item"
+              />
+            </div>
           </div>
           <div className="header-buttons">
             <div>{/* <button>Cancel</button> */}</div>

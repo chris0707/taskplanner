@@ -133,3 +133,7 @@ textArea,input {
 .header-buttons button:hover {
     background-color: salmon;
 }
+
+.header-taskItem {
+    pointer-events:fill;
+}

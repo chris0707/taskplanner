@@ -73,7 +73,6 @@ export default function TaskItem(props) {
       </button>
       <input
         type="checkbox"
-        id={`${taskName}-${taskObj.id}`}
         name={`${taskName}-${taskObj.id}`}
         onClick={handleToggleItemClick}
         checked={isChecked}
@@ -81,6 +80,7 @@ export default function TaskItem(props) {
       />
       <textarea
         style={isChecked ? { textDecoration: "line-through" } : {}}
+        id={`${taskName}-${taskObj.id}`}
         htmlFor={`${taskName}-${taskObj.id}`}
         onClick={handleToggleItemClick}
         onChange={autoGrowTextArea}

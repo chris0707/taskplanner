@@ -12,10 +12,11 @@ export default function InputBox() {
 
     const addNewInput = (event) => {
       // Clear the value and set it back to the placeholder
+      const leftOverKeys = event.target.value;
       event.target.value = "";
       const newInput = {
         id: inputs.length + 1,
-        value: "",
+        value: leftOverKeys,
       };
 
       setTimeout(() => {
@@ -23,6 +24,9 @@ export default function InputBox() {
         if (newInputRef) {
           newInputRef.focus();
         }
+
+        newInputRef.selectionStart = newInputRef.selectionEnd = newInputRef.value.length;
+
       }, 0);
 
       setInputs([...inputs, newInput]);
@@ -69,7 +73,7 @@ export default function InputBox() {
           className="header-inputContainer"
           onClick={() => setIsBoxClicked(true)}
         >
-          <p>+ Create a task</p>
+          <p className='create-task'>+ Create a task</p>
         </div>
       ) : (
         <div className="header-inputContainer">

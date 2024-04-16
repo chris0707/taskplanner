@@ -134,6 +134,10 @@ textArea,input {
     background-color: salmon;
 }
 
+.create-task:hover {
+    cursor: pointer;
+}
+
 .header-taskItem {
-    pointer-events:fill;
+    
 }

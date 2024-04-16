@@ -32,6 +32,22 @@ export default function Body(props) {
           if (IsLastPendingItem(thisCard.id, taskItemId))
           {
             addTaskToCard(thisCard.id); // Add new taskItem to the list
+
+            setTimeout(() => {
+              console.log('taskname:',thisCard.taskName);
+              console.log('taskId:', `${thisCard.taskName}-${taskItemId+1}`);
+
+              // Change the logic instead of adding + 1, refer to the newly added
+              const newInputRef = document.getElementById(`${thisCard.taskName}-${taskItemId+1}`);
+              if (newInputRef) {
+                newInputRef.focus(); // Buggy, ensure that it retrieves the latest id.
+              }
+      
+              // newInputRef.selectionStart = newInputRef.selectionEnd = newInputRef.value.length;
+      
+            }, 1000);
+
+            // set auto focus
             e.preventDefault();
           }
         }

@@ -180,9 +180,12 @@ export default function GlobalContextProvider(props) {
     }
 
     const addTaskToCard = (cardId) => {
+      
+      const newTaskId = getNewTaskItemId(cardId);
+
       // create new task
       const newTask = {
-        id: getNewTaskItemId(cardId),
+        id: newTaskId,
         value: "",
         isChecked: false
       }
@@ -195,6 +198,8 @@ export default function GlobalContextProvider(props) {
           return card;
         })
       })
+
+      return newTaskId;
     }
 
     const IsLastItem = (cardId, taskItemId) => {

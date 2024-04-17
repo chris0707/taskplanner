@@ -35,6 +35,24 @@
     z-index: 998; /* Ensure it's on top of everything */
   }
 
+  .card-delete {
+    top: -10px;
+    right: -10px;
+    position: absolute;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: rgb(246, 94, 94);
+    font-size: small;
+    border-radius: 50%;
+    width: 30px;
+    height: 30px;
+  }
+
+  .card-delete:hover {
+    background-color: red;
+  }
+
 .expanded{
     /* position: relative; */
     z-index: 999;
@@ -42,8 +60,17 @@
     top: 50%;
     transform: translate(-50%, -50%);
     margin: 0px;
+    max-height: 95%;
+    overflow-y: auto;
+    overflow-x: hidden;
     /* animation: moveToMiddle 0.5s ease forwards; */
 }
+
+.expanded .card-delete {
+  right: 0;
+  top:0;
+}
+
 .shrinking {
     /* top: initial;
     left: initial;
@@ -64,6 +91,7 @@
       height: 20px;
       background-color: rgba(0, 0, 0, 0);
       border: none;
+      resize: none;
     }
   
   .card-body {
@@ -188,25 +216,6 @@
   }
 
 
-
-  .card-delete {
-    top: -10px;
-    right: -10px;
-    position: absolute;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    background-color: rgb(246, 94, 94);
-    font-size: small;
-    border-radius: 50%;
-    width: 30px;
-    height: 30px;
-  }
-
-  .card-delete:hover {
-    background-color: red;
-  }
-
 .collapsible-header {
   display: flex;
   justify-content: end;
@@ -243,6 +252,10 @@
 
 .completed .task:hover textarea{
   background-color: grey;
+}
+
+.textAreaNoInput {
+  pointer-events: none;
 }
 
   /* @keyframes moveToMiddle {

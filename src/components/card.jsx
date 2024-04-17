@@ -71,6 +71,7 @@ export default function Card(props) {
                   setThisHeaderVal(e.target.value);
                 }}
                 value={thisHeaderVal}
+                placeholder="Add task name"
               ></textarea>
             </div>
             <CardBody
@@ -94,12 +95,9 @@ export default function Card(props) {
             X
           </button>
           <div className="card-header" onClick={handleHeaderFooterClick}>
-            {thisHeaderVal}
+            <textarea className="textAreaNoInput" value={thisHeaderVal} placeholder="Add task name" />
           </div>
-          <CardBody
-            card={thisCard}
-            onTaskItemDelete={onTaskItemDelete}
-          />
+          <CardBody card={thisCard} onTaskItemDelete={onTaskItemDelete} />
         </div>
       )}
     </>

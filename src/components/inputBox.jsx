@@ -17,6 +17,7 @@ export default function InputBox() {
       const newInput = {
         id: inputs.length + 1,
         value: leftOverKeys,
+        isChecked: false
       };
 
       setTimeout(() => {

@@ -73,11 +73,14 @@ export default function TaskItem(props) {
       </button>
       <input
         type="checkbox"
+        id={`${taskName}-${taskObj.id}`}
+        className='hidden-checkbox'
         name={`${taskName}-${taskObj.id}`}
         onClick={handleToggleItemClick}
         checked={isChecked}
         onChange={handleCheckboxChange}
       />
+      <label for={`${taskName}-${taskObj.id}`} class="custom-checkbox"></label>
       <textarea
         style={isChecked ? { textDecoration: "line-through" } : {}}
         id={`${taskName}-${taskObj.id}`}

@@ -22,7 +22,7 @@
     box-shadow: 8px 8px 8px rgba(0, 0, 0, 0.1);
     margin: 10px;
     background-color: lightskyblue;
-    border: 2px solid black;
+    border: 2px solid #5f6368;
   }
 
   .cardOverlay {
@@ -84,7 +84,7 @@
     justify-content: start;
     align-items: center;
     padding: 10px;
-    border-bottom: 2px solid black;
+    border-bottom: 2px solid #5f6368;
   }
     .card-header textarea {
       width: 100%;
@@ -100,7 +100,7 @@
   
 .card-footer {
   padding: 10px;
-  border-top: 2px solid black;
+  border-top: 2px solid #5f6368;
 }
 
   .card-footer  {
@@ -114,7 +114,7 @@
   .card-footer button,
   .btnFooter {
     background-color: transparent;
-    border: 0px solid black;
+    border: 0px solid #5f6368;
     border-radius: 8px;
     margin: 0 5px;
     font-size: medium;
@@ -130,7 +130,7 @@
   .task {
     margin-bottom: 8px;
     background-color: lightsalmon;
-    border: 2px solid black;
+    border: 2px solid #5f6368;
     border-radius: 8px;
     display: flex;
     /* flex-direction: row; */
@@ -236,22 +236,22 @@
 
 
 .completed {
-  border-top: 1px solid black;
+  border-top: 1px solid #5f6368;
   margin-top: 5px;
   padding-top: 5px;
 }
 
 .completed textarea,
 .completed .task {
-  background-color: grey;
+  background-color: #5f6368 !important;
 }
 
 .completed .task:hover {
-  background-color: grey;
+  background-color: #5f6368 !important;
 }
 
 .completed .task:hover textarea{
-  background-color: grey;
+  background-color: #5f6368 !important;
 }
 
 .textAreaNoInput {
@@ -272,4 +272,47 @@
       transform: translate(-50%, -50%);
     }
   } */
+
+  * {
+    background-color: #202124 !important; 
+    color: #e8eaed;
+  }
+  .hidden-checkbox {
+    position: absolute;
+    left: -9999px;
+  }
+
+  .custom-checkbox {
+    display: inline-block;
+    width: 20px;
+    height: 20px;
+    background-color: transparent;
+    border: 2px solid #5f6368;
+    border-radius: 4px;
+    cursor: pointer;
+  }
+
+  .task label {
+    min-height: 0;
+  }
+ 
+  .custom-checkbox::before {
+    content: "";
+    display: flex;
+    width: 20px;
+    height: 100%;
+    background-color: #202124; /* Change color to match your design */
+    border-radius: 2px;
+    align-items: center;
+    justify-content: center;
+    visibility: hidden;
+  }
+  
+  .hidden-checkbox:checked + .custom-checkbox::before {
+    visibility: visible;
+    content: "\2713"; 
+  }
+
+
+
   

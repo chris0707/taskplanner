@@ -11,7 +11,9 @@ export default function Header() {
                 <Link className='noUnderline' to="taskplanner/"><b>Task Planner</b></Link>
               </div>
               <div>
-              <Link className='noUnderline' to="taskplanner/Login">Login</Link>
+                <div>
+                  <Link className='noUnderline' to="taskplanner/Login">Login</Link>
+                </div>
               </div>
             </div>
       </nav>

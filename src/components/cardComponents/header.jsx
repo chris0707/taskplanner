@@ -8,10 +8,10 @@ export default function Header() {
             <div className="header-headerTitle">
               <div>
                 <span className="stealth">Stleath|Stride</span>
-                <Link className='noUnderline' to="/"><b>Task Planner</b></Link>
+                <Link className='noUnderline' to="taskplanner/"><b>Task Planner</b></Link>
               </div>
               <div>
-              <Link className='noUnderline' to="/Login">Login</Link>
+              <Link className='noUnderline' to="taskplanner/Login">Login</Link>
               </div>
             </div>
       </nav>

@@ -13,8 +13,8 @@ function App() {
         <GlobalContextProvider>
           <Header />
           <Routes>
-            <Route path="/" element={<TaskPage />} />
-            <Route path="/Login" element={<Login />} />
+            <Route path="taskplanner/" element={<TaskPage />} />
+            <Route path="taskplanner/Login" element={<Login />} />
           </Routes>
         </GlobalContextProvider>
       </BrowserRouter>

@@ -1,11 +1,14 @@
 import React, { useState } from 'react';
 import './login.css'; // Optional: import a CSS file for styling
+import { GoogleLogin } from '@react-oauth/google';
 
-export default function Login() {
+export default function Login(param) {
+  const { cid } = param;
   const [username, setUsername] = useState('');
   const [password, setPassword] = useState('');
   const [error, setError] = useState('');
-
+  // const clientId = "608419629230-ltetaerabjp9nu9hmjmqut1l5cj1229l.apps.googleusercontent.com";
+  console.log("cid:",cid);
   const handleSubmit = (event) => {
     event.preventDefault();
 
@@ -25,6 +28,14 @@ export default function Login() {
     setUsername('');
     setPassword('');
   };
+
+  const onSuccess = (res) => {
+    console.log("LOGIN SUCCESS! res:", res);
+  }
+
+  const onFailure = (res) => {
+    console.log("LOGIN FAILED! res:", res);
+  }
 
   return (
     <div className="login-container">
@@ -54,6 +65,17 @@ export default function Login() {
           {error && <p className="error">{error}</p>}
           <button type="submit">Login</button>
         </form>
+      </div>
+      <div>
+        <span>test</span>
+        <GoogleLogin 
+          clientId={cid}
+          buttonText="Login"
+          onSuccess={onSuccess}
+          onFailure={onFailure}
+          cookiePolicy={'single_host_origin'}
+          isSignedIn={true}
+        />
       </div>
     </div>
   );

@@ -6,8 +6,7 @@ import Header from './components/cardComponents/header';
 import { Route, BrowserRouter, Routes, Link } from 'react-router-dom';
 import Login from './pages/login';
 import Privacy from './pages/privacy';
-import { useEffect } from 'react';
-import { GoogleOAuthProvider, gapi } from '@react-oauth/google';
+import { GoogleOAuthProvider } from '@react-oauth/google';
 
 
 function App() {

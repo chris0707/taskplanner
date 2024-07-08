@@ -1,0 +1,15 @@
+{
+  "files": {
+    "main.css": "/taskplanner/static/css/main.721a938f.css",
+    "main.js": "/taskplanner/static/js/main.b5895835.js",
+    "static/js/592.31204e3c.chunk.js": "/taskplanner/static/js/592.31204e3c.chunk.js",
+    "index.html": "/taskplanner/index.html",
+    "main.721a938f.css.map": "/taskplanner/static/css/main.721a938f.css.map",
+    "main.b5895835.js.map": "/taskplanner/static/js/main.b5895835.js.map",
+    "592.31204e3c.chunk.js.map": "/taskplanner/static/js/592.31204e3c.chunk.js.map"
+  },
+  "entrypoints": [
+    "static/css/main.721a938f.css",
+    "static/js/main.b5895835.js"
+  ]
+}
